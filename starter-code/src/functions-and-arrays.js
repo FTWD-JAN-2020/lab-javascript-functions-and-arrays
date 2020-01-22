@@ -46,6 +46,23 @@ const sumArray = arr => arr.reduce((acc, val) => {
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+// const averageNumbers = (arr) => {
+//   if(arr.length < 1) return null;
+//   return arr.reduce((result, currValue) => result+currValue)/arr.length;
+// }
+// const averageNumbers = (arr) => {
+//   if(arr.length < 1) return null
+//   sumArray(arr)/arr.length;
+// }
+function averageNumbers(arr) {
+  if(arr.length < 1) return null;
+  let sum = 0;
+  arr.forEach(num => {
+    sum+=num;
+  });
+  return sum/arr.length;
+}
+
 
 // Level 2: Array of strings
 const wordsArr = [
@@ -60,6 +77,15 @@ const wordsArr = [
   'fuel',
   'palace'
 ];
+function averageWordLength(arr) {
+  if(arr.length < 1) return null
+  let average = 0;
+  for(let i = 0; i < arr.length; i++) {
+    average+=arr[i].length;
+  }
+  return average/arr.length;
+}
+
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -75,6 +101,21 @@ const wordsUnique = [
   'simple',
   'bring'
 ];
+// function uniquifyArray(arr) {
+//   let mySet = new Set(arr);
+//   let newSet = [...mySet];
+//   return newSet;
+// }
+function uniquifyArray(arr) {
+  let newArr = [];
+  for(let i in arr) {
+    if(newArr.includes(arr[i]) == false) {
+      newArr.push(arr[i]);
+    }
+  }
+  return newArr;
+}
+
 
 // Iteration #6: Find elements
 const wordsFind = [
@@ -87,6 +128,9 @@ const wordsFind = [
   'truth',
   'disobedience'
 ];
+function doesWordExist(arr, word) {
+  return arr.includes(word);
+}
 
 // Iteration #7: Count repetition
 const wordsCount = [
@@ -102,6 +146,15 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
+function howManyTimes(arr, word) {
+  let count = 0;
+  for(let i in arr) {
+    if(arr[i] === word) {
+      count+=1;
+    }
+  }
+  return count;
+}
 
 // Iteration #8: Bonus
 
@@ -127,3 +180,31 @@ const matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+function greatestProduct(matrix) {
+  let max = 0;
+  let result = 0;
+  for(let i = 0; i < matrix.length; i++) {
+    for(let j = 0; j < matrix[i].length; j++) {
+      if(j-3 >= 0) {
+        result = matrix[i][j] * matrix[i][j-1] * matrix[i][j-2] * matrix[i][j-3];
+        if(max < result) {
+          max = result;
+        }
+      }
+      if(i-3 >= 0) {
+        result = matrix[i][j] * matrix[i-1][j] * matrix[i-2][j] * matrix[i-3][j];
+        if(max < result) {
+          max = result;
+        }
+      }
+      if(i-3 >= 0 && j-3 >=0) {
+        result = matrix[i][j] * matrix[i-1][j-1] * matrix[i-2][j-2] * matrix[i-3][j-3];
+        if(max < result) {
+          max = result;
+        }
+      }
+    }
+  }
+  return max;
+}
